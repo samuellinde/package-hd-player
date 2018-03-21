@@ -1,5 +1,7 @@
 local localized, CHILDS, CONTENTS = ...
 
+local M = {}
+
 local json = require "json"
 
 local font = resource.load_font(localized "roboto.ttf")
