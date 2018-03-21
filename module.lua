@@ -3,7 +3,7 @@ local localized, CHILDS, CONTENTS = ...
 local M = {}
 
 local font = resource.load_font(localized "roboto.ttf")
-local text
+local text = "test"
 
 print "sub module init"
 
