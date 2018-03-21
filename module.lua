@@ -2,7 +2,7 @@ local localized, CHILDS, CONTENTS = ...
 
 local json = require "json"
 
-local font = resource.load_font(localized "silkscreen.ttf")
+local font = resource.load_font(localized "roboto.ttf")
 local text
 
 print "sub module init"
