@@ -312,7 +312,7 @@ end
 local ImageJob = function(item, ctx, fn)
     fn.wait_t(ctx.starts - settings.IMAGE_PRELOAD)
 
-    local res = resource.load_image(ctx.asset)
+    local res = resource.load_image(localized(ctx.asset))
 
     for now in fn.wait_next_frame do
         local state, err = res:state()
@@ -395,7 +395,7 @@ local VideoJob = function(item, ctx, fn)
 
     local raw = sys.get_ext "raw_video"
     local res = raw.load_video{
-        file = ctx.asset,
+        file = localized(ctx.asset),
         audio = Config.get_audio(),
         looped = false,
         paused = true,
@@ -460,7 +460,7 @@ local Queue = (function()
             video = VideoJob,
         })[item.type])
 
-        local success, asset = pcall(resource.open_file, item.asset_name)
+        local success, asset = pcall(resource.open_file, localized(item.asset_name))
         if not success then
             print("CANNOT GRAB ASSET: ", asset)
             return
