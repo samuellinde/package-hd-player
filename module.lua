@@ -1,3 +1,5 @@
+local localized, CHILDS, CONTENTS = ...
+
 local json = require "json"
 
 local font = resource.load_font(localized "silkscreen.ttf")
