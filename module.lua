@@ -3,7 +3,7 @@ local localized, CHILDS, CONTENTS = ...
 local M = {}
 
 local font = resource.load_font(localized "silkscreen.ttf")
-local text = "test"
+local text
 
 print "sub module init"
 
