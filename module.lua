@@ -23,7 +23,7 @@ end
 function M.draw()
     -- print("--- frame", sys.now())
     gl.clear(0, 0, 0, 1)
-    font:draw(100, 100, text, 60, 1, 1, 1, 1)
+    font:write(100, 100, text, 60, 1, 1, 1, 1)
     -- Config.apply_transform()
     -- Queue.tick()
 end
