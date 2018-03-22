@@ -73,8 +73,48 @@ local white = resource.create_colored_texture(1,1,1,1)
 local black = resource.create_colored_texture(0,0,0,1)
 local font = resource.load_font(localized "roboto.ttf")
 
+local function ramp(t_s, t_e, t_c, ramp_time)
+    if ramp_time == 0 then return 1 end
+    local delta_s = t_c - t_s
+    local delta_e = t_e - t_c
+    return math.min(1, delta_s * 1/ramp_time, delta_e * 1/ramp_time)
+end
+
+local function cycled(items, offset)
+    offset = offset % #items + 1
+    return items[offset], offset
+end
+
+local Loading = (function()
+    local loading = "Loading..."
+    local size = 80
+    local w = font:width(loading, size)
+    local alpha = 0
+    
+    local function draw()
+        if alpha == 0 then
+            return
+        end
+        font:write((WIDTH-w)/2, (HEIGHT-size)/2, loading, size, 1,1,1,alpha)
+    end
+
+    local function fade_in()
+        alpha = math.min(1, alpha + 0.01)
+    end
+
+    local function fade_out()
+        alpha = math.max(0, alpha - 0.01)
+    end
+
+    return {
+        fade_in = fade_in;
+        fade_out = fade_out;
+        draw = draw;
+    }
+end)()
+
 function M.draw()
-    font:write(100, 100, text, 30, 1,1,1,1)
+    font:write(100, 100, text, 60, 1,1,1,1)
 end
 
 function M.unload()
