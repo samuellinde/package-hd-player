@@ -590,7 +590,7 @@ function M.content_update(name)
     if name == 'config.json' then
         Config.update_config(name)
     end
-    text = Config.get_rotation()
+    text = sys.now()
 end
 
 function M.content_remove(name)
