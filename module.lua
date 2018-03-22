@@ -143,6 +143,7 @@ local Config = (function()
         local config = json.decode(raw)
 
         text = config.rotation
+
         synced = config.synced
         kenburns = config.kenburns
         audio = config.audio
