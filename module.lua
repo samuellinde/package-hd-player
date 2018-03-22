@@ -302,7 +302,7 @@ end
 local ImageJob = function(item, ctx, fn)
     fn.wait_t(ctx.starts - settings.IMAGE_PRELOAD)
 
-    local res = resource.load_image(localized(ctx.asset))
+    local res = resource.load_image(ctx.asset)
 
     for now in fn.wait_next_frame do
         local state, err = res:state()
@@ -455,8 +455,6 @@ local Queue = (function()
             print("CANNOT GRAB ASSET: ", asset)
             return
         end
-
-        text = item.asset_name
 
         -- an image may overlap another image
         if #jobs > 0 and jobs[#jobs].type == "image" and item.type == "image" then
