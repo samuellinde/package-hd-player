@@ -28,8 +28,6 @@ function M.draw()
     -- Queue.tick()
 end
 
-return M
-
 local shaders = {
     multisample = resource.create_shader[[
         uniform sampler2D Texture;
@@ -591,4 +589,6 @@ local Queue = (function()
     }
 end)()
 
-util.set_interval(1, node.gc)
+-- util.set_interval(1, node.gc)
+
+return M
