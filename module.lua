@@ -3,6 +3,7 @@ local localized, CHILDS, CONTENTS = ...
 local M = {}
 
 local json = require "json"
+local text
 
 print "sub module init"
 
@@ -12,9 +13,7 @@ end
 
 function M.content_update(name)
     print("sub module content update", name)
-    -- if name == 'text.txt' then
-    --     text = resource.load_file(localized(name))
-    -- end
+    text = sys.now()
 end
 
 function M.content_remove(name)
@@ -587,6 +586,7 @@ util.set_interval(1, node.gc)
 function M.draw()
     -- print("--- frame", sys.now())
     -- gl.clear(0, 0, 0, 1)
+    font:draw(100, 100, text, 60, 1, 1, 1, 1)
     Config.apply_transform()
     Queue.tick()
 end
