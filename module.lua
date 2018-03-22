@@ -173,7 +173,7 @@ local Config = (function()
                         offset = offset,
                         total_duration = total_duration,
                         duration = item.duration,
-                        asset_name = localized(item.file.asset_name),
+                        asset_name = item.file.asset_name,
                         type = item.file.type,
                     }
                     offset = offset + item.duration
@@ -542,13 +542,14 @@ local Queue = (function()
                     break
                 end
                 local item = Scheduler.get_next()
+                text = item
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
         end
 
         if #jobs == 0 then
-            Loading.fade_in()
-            -- font:write(100, 100, text, 60, 1,1,1,1)
+            -- Loading.fade_in()
+            font:write(100, 100, text, 60, 1,1,1,1)
         else
             Loading.fade_out()
         end
