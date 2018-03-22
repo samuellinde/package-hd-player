@@ -113,86 +113,86 @@ local Loading = (function()
     }
 end)()
 
--- local Config = (function()
---     local playlist = {}
---     local switch_time = 1
---     local synced = false
---     local kenburns = false
---     local audio = false
---     local portrait = false
---     local rotation = 0
---     local transform = function() end
+local Config = (function()
+    local playlist = {}
+    local switch_time = 1
+    local synced = false
+    local kenburns = false
+    local audio = false
+    local portrait = false
+    local rotation = 0
+    local transform = function() end
 
---     local config_file = "config.json"
+    local config_file = "config.json"
 
---     -- You can put a static-config.json file into the package directory.
---     -- That way the config.json provided by info-beamer hosted will be
---     -- ignored and static-config.json is used instead.
---     --
---     -- This allows you to import this package bundled with images/
---     -- videos and a custom generated configuration without changing
---     -- any of the source code.
---     if CONTENTS["static-config.json"] then
---         config_file = "static-config.json"
---         print "[WARNING]: will use static-config.json, so config.json is ignored"
---     end
+    -- You can put a static-config.json file into the package directory.
+    -- That way the config.json provided by info-beamer hosted will be
+    -- ignored and static-config.json is used instead.
+    --
+    -- This allows you to import this package bundled with images/
+    -- videos and a custom generated configuration without changing
+    -- any of the source code.
+    -- if CONTENTS["static-config.json"] then
+    --     config_file = "static-config.json"
+    --     print "[WARNING]: will use static-config.json, so config.json is ignored"
+    -- end
 
---     util.file_watch(config_file, function(raw)
---         print("updated " .. config_file)
---         local config = json.decode(raw)
+    util.file_watch(config_file, function(raw)
+        print("updated " .. config_file)
+        local config = json.decode(raw)
 
---         synced = config.synced
---         kenburns = config.kenburns
---         audio = config.audio
---         progress = config.progress
+        synced = config.synced
+        kenburns = config.kenburns
+        audio = config.audio
+        progress = config.progress
 
---         rotation = config.rotation
---         portrait = rotation == 90 or rotation == 270
---         gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
---         transform = util.screen_transform(rotation)
---         print("screen size is " .. WIDTH .. "x" .. HEIGHT)
+        rotation = config.rotation
+        portrait = rotation == 90 or rotation == 270
+        gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
+        transform = util.screen_transform(rotation)
+        print("screen size is " .. WIDTH .. "x" .. HEIGHT)
 
---         if #config.playlist == 0 then
---             playlist = settings.FALLBACK_PLAYLIST
---             switch_time = 0
---             kenburns = false
---         else
---             playlist = {}
---             local total_duration = 0
---             for idx = 1, #config.playlist do
---                 local item = config.playlist[idx]
---                 total_duration = total_duration + item.duration
---             end
+        if #config.playlist == 0 then
+            playlist = settings.FALLBACK_PLAYLIST
+            switch_time = 0
+            kenburns = false
+        else
+            playlist = {}
+            local total_duration = 0
+            for idx = 1, #config.playlist do
+                local item = config.playlist[idx]
+                total_duration = total_duration + item.duration
+            end
 
---             local offset = 0
---             for idx = 1, #config.playlist do
---                 local item = config.playlist[idx]
---                 if item.duration > 0 then
---                     playlist[#playlist+1] = {
---                         offset = offset,
---                         total_duration = total_duration,
---                         duration = item.duration,
---                         asset_name = item.file.asset_name,
---                         type = item.file.type,
---                     }
---                     offset = offset + item.duration
---                 end
---             end
---             switch_time = config.switch_time
---         end
---     end)
+            local offset = 0
+            for idx = 1, #config.playlist do
+                local item = config.playlist[idx]
+                if item.duration > 0 then
+                    playlist[#playlist+1] = {
+                        offset = offset,
+                        total_duration = total_duration,
+                        duration = item.duration,
+                        asset_name = item.file.asset_name,
+                        type = item.file.type,
+                    }
+                    offset = offset + item.duration
+                end
+            end
+            switch_time = config.switch_time
+        end
+    end)
 
---     return {
---         get_playlist = function() return playlist end;
---         get_switch_time = function() return switch_time end;
---         get_synced = function() return synced end;
---         get_kenburns = function() return kenburns end;
---         get_audio = function() return audio end;
---         get_progress = function() return progress end;
---         get_rotation = function() return rotation, portrait end;
---         apply_transform = function() return transform() end;
---     }
--- end)()
+    return {
+        get_playlist = function() return playlist end;
+        get_switch_time = function() return switch_time end;
+        get_synced = function() return synced end;
+        get_kenburns = function() return kenburns end;
+        get_audio = function() return audio end;
+        get_progress = function() return progress end;
+        get_rotation = function() return rotation, portrait end;
+        apply_transform = function() return transform() end;
+    }
+end)()
 
 -- local Intermissions = (function()
 --     local intermissions = {}
