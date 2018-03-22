@@ -568,8 +568,6 @@ local Queue = (function()
             end
         end
 
-        text = #jobs
-
         -- Loading.draw()
     end
 
