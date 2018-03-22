@@ -544,8 +544,8 @@ local Queue = (function()
                 end
                 local item = Scheduler.get_next()
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
+                text = 'not synced'
             end
-            text = 'not synced'
         end
 
         if #jobs == 0 then
