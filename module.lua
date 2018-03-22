@@ -549,6 +549,8 @@ local Queue = (function()
             text = next_text
         end
 
+        text = 'test'
+
         if #jobs == 0 then
             Loading.fade_in()
         else
