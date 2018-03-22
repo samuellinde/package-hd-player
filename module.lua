@@ -456,6 +456,8 @@ local Queue = (function()
             return
         end
 
+        text = item.asset_name
+
         -- an image may overlap another image
         if #jobs > 0 and jobs[#jobs].type == "image" and item.type == "image" then
             starts = starts - Config.get_switch_time()
@@ -547,8 +549,8 @@ local Queue = (function()
         end
 
         if #jobs == 0 then
-            -- Loading.fade_in()
-            font:write(100, 100, text, 60, 1,1,1,1)
+            Loading.fade_in()
+            -- font:write(100, 100, text, 60, 1,1,1,1)
         else
             Loading.fade_out()
         end
