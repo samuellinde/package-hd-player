@@ -547,7 +547,8 @@ local Queue = (function()
         end
 
         if #jobs == 0 then
-            Loading.fade_in()
+            -- Loading.fade_in()
+            font:write(100, 100, text, 60, 1,1,1,1)
         else
             Loading.fade_out()
         end
@@ -577,7 +578,6 @@ util.set_interval(1, node.gc)
 function M.draw()
     -- print("--- frame", sys.now())
     gl.clear(0, 0, 0, 1)
-    font:write(100, 100, text, 60, 1,1,1,1)
     Config.apply_transform()
     Queue.tick()
 end
