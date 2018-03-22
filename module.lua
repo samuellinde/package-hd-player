@@ -587,10 +587,10 @@ end
 
 function M.content_update(name)
     print("sub module content update", name)
-    -- if name == 'text.txt' then
-    --     text = resource.load_file(localized(name))
-    -- end
-    text = sys.now()
+    if name == 'config.json' then
+        Config.update_config(name)
+    end
+    text = Config.get_rotation()
 end
 
 function M.content_remove(name)
