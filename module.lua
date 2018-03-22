@@ -157,7 +157,9 @@ local Config = (function()
             playlist = settings.FALLBACK_PLAYLIST
             switch_time = 0
             kenburns = false
+            text = 'playlist fallback'
         else
+            text = 'playlist items'
             playlist = {}
             local total_duration = 0
             for idx = 1, #config.playlist do
@@ -536,13 +538,11 @@ local Queue = (function()
             if sys.now() + settings.PRELOAD_TIME > scheduled_until then
                 schedule_synced()
             end
-            text = 'synced'
         else
             for try = 1,3 do
                 if sys.now() + settings.PRELOAD_TIME < scheduled_until then
                     break
                 end
-                text = 'not synced'
                 local item = Scheduler.get_next()
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
