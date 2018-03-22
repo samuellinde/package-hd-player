@@ -537,19 +537,14 @@ local Queue = (function()
                 schedule_synced()
             end
         else
-            local next_text = ''
             for try = 1,3 do
                 if sys.now() + settings.PRELOAD_TIME < scheduled_until then
                     break
                 end
                 local item = Scheduler.get_next()
-                next_text = next_text .. item .. ', '
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
-            text = next_text
         end
-
-        text = 'test'
 
         if #jobs == 0 then
             Loading.fade_in()
@@ -569,7 +564,7 @@ local Queue = (function()
             end
         end
 
-        -- Loading.draw()
+        Loading.draw()
     end
 
     return {
