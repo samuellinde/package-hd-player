@@ -530,7 +530,7 @@ local Queue = (function()
     end
 
     local function tick()
-        -- gl.clear(0, 0, 0, 0)
+        gl.clear(0, 0, 0, 0)
 
         if Config.get_synced() then
             if sys.now() + settings.PRELOAD_TIME > scheduled_until then
