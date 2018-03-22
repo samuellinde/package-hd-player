@@ -450,7 +450,7 @@ local Queue = (function()
             video = VideoJob,
         })[item.type])
 
-        local success, asset = pcall(resource.open_file, item.asset_name)
+        local success, asset = pcall(resource.open_file, localized(item.asset_name))
         if not success then
             print("CANNOT GRAB ASSET: ", asset)
             return
