@@ -250,6 +250,7 @@ local Scheduler = (function()
 
         local item
         item, playlist_offset = cycled(playlist, playlist_offset)
+        text = item.asset_name
         print(string.format("next scheduled item is %s [%f]", item.asset_name, item.duration))
         return item
     end
@@ -542,7 +543,6 @@ local Queue = (function()
                     break
                 end
                 local item = Scheduler.get_next()
-                text = item
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
         end
