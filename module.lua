@@ -142,8 +142,6 @@ local Config = (function()
         raw = resource.load_file(localized(config_file))
         local config = json.decode(raw)
 
-        text = config.rotation
-
         synced = config.synced
         kenburns = config.kenburns
         audio = config.audio
