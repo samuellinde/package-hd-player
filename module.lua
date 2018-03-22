@@ -312,7 +312,7 @@ end
 local ImageJob = function(item, ctx, fn)
     fn.wait_t(ctx.starts - settings.IMAGE_PRELOAD)
 
-    local res = resource.load_image(localized ctx.asset)
+    local res = resource.load_image(localized(ctx.asset))
 
     for now in fn.wait_next_frame do
         local state, err = res:state()
