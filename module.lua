@@ -181,7 +181,7 @@ local Config = (function()
             end
             switch_time = config.switch_time
         end
-    end)
+    end
 
     return {
         get_playlist = function() return playlist end;
