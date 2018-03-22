@@ -536,6 +536,7 @@ local Queue = (function()
             if sys.now() + settings.PRELOAD_TIME > scheduled_until then
                 schedule_synced()
             end
+            text = 'synced'
         else
             for try = 1,3 do
                 if sys.now() + settings.PRELOAD_TIME < scheduled_until then
@@ -544,6 +545,7 @@ local Queue = (function()
                 local item = Scheduler.get_next()
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
+            text = 'not synced'
         end
 
         if #jobs == 0 then
