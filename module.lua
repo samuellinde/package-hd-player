@@ -137,8 +137,9 @@ local Config = (function()
     --     print "[WARNING]: will use static-config.json, so config.json is ignored"
     -- end
 
-    local function update_config(config_file)
+    function update_config(config_file)
         print("updated " .. config_file)
+        text = config.rotation
         raw = resource.load_file(localized(config_file))
         local config = json.decode(raw)
 
@@ -590,7 +591,6 @@ function M.content_update(name)
     if name == 'config.json' then
         Config.update_config(name)
     end
-    text = sys.now()
 end
 
 function M.content_remove(name)
