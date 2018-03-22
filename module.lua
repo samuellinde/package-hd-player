@@ -137,50 +137,51 @@ local Config = (function()
     --     print "[WARNING]: will use static-config.json, so config.json is ignored"
     -- end
 
-    -- util.file_watch(config_file, function(raw)
-    --     print("updated " .. config_file)
-    --     local config = json.decode(raw)
+    local function update_config(config_file)
+        print("updated " .. config_file)
+        raw = resource.load_file(localized(config_file))
+        local config = json.decode(raw)
 
-    --     synced = config.synced
-    --     kenburns = config.kenburns
-    --     audio = config.audio
-    --     progress = config.progress
+        synced = config.synced
+        kenburns = config.kenburns
+        audio = config.audio
+        progress = config.progress
 
-    --     rotation = config.rotation
-    --     portrait = rotation == 90 or rotation == 270
-    --     gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
-    --     transform = util.screen_transform(rotation)
-    --     print("screen size is " .. WIDTH .. "x" .. HEIGHT)
+        rotation = config.rotation
+        portrait = rotation == 90 or rotation == 270
+        gl.setup(NATIVE_WIDTH, NATIVE_HEIGHT)
+        transform = util.screen_transform(rotation)
+        print("screen size is " .. WIDTH .. "x" .. HEIGHT)
 
-    --     if #config.playlist == 0 then
-    --         playlist = settings.FALLBACK_PLAYLIST
-    --         switch_time = 0
-    --         kenburns = false
-    --     else
-    --         playlist = {}
-    --         local total_duration = 0
-    --         for idx = 1, #config.playlist do
-    --             local item = config.playlist[idx]
-    --             total_duration = total_duration + item.duration
-    --         end
+        if #config.playlist == 0 then
+            playlist = settings.FALLBACK_PLAYLIST
+            switch_time = 0
+            kenburns = false
+        else
+            playlist = {}
+            local total_duration = 0
+            for idx = 1, #config.playlist do
+                local item = config.playlist[idx]
+                total_duration = total_duration + item.duration
+            end
 
-    --         local offset = 0
-    --         for idx = 1, #config.playlist do
-    --             local item = config.playlist[idx]
-    --             if item.duration > 0 then
-    --                 playlist[#playlist+1] = {
-    --                     offset = offset,
-    --                     total_duration = total_duration,
-    --                     duration = item.duration,
-    --                     asset_name = item.file.asset_name,
-    --                     type = item.file.type,
-    --                 }
-    --                 offset = offset + item.duration
-    --             end
-    --         end
-    --         switch_time = config.switch_time
-    --     end
-    -- end)
+            local offset = 0
+            for idx = 1, #config.playlist do
+                local item = config.playlist[idx]
+                if item.duration > 0 then
+                    playlist[#playlist+1] = {
+                        offset = offset,
+                        total_duration = total_duration,
+                        duration = item.duration,
+                        asset_name = item.file.asset_name,
+                        type = item.file.type,
+                    }
+                    offset = offset + item.duration
+                end
+            end
+            switch_time = config.switch_time
+        end
+    end)
 
     return {
         get_playlist = function() return playlist end;
@@ -574,6 +575,10 @@ end)()
 
 function M.draw()
     font:write(100, 100, text, 60, 1,1,1,1)
+    -- print("--- frame", sys.now())
+    -- gl.clear(0, 0, 0, 1)
+    -- Config.apply_transform()
+    -- Queue.tick()
 end
 
 function M.unload()
