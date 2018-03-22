@@ -532,12 +532,13 @@ local Queue = (function()
     end
 
     local function tick()
-        gl.clear(0, 0, 0, 0)
+        -- gl.clear(0, 0, 0, 0)
 
         if Config.get_synced() then
             if sys.now() + settings.PRELOAD_TIME > scheduled_until then
                 schedule_synced()
             end
+            text = "synced"
         else
             for try = 1,3 do
                 if sys.now() + settings.PRELOAD_TIME < scheduled_until then
@@ -546,6 +547,7 @@ local Queue = (function()
                 local item = Scheduler.get_next()
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
             end
+            text = "not synced"
         end
 
         if #jobs == 0 then
@@ -566,7 +568,9 @@ local Queue = (function()
             end
         end
 
-        Loading.draw()
+        text = #jobs
+
+        -- Loading.draw()
     end
 
     return {
@@ -577,9 +581,9 @@ end)()
 util.set_interval(1, node.gc)
 
 function M.draw()
-    -- font:write(100, 100, text, 60, 1,1,1,1)
     -- print("--- frame", sys.now())
     gl.clear(0, 0, 0, 1)
+    font:write(100, 100, text, 60, 1,1,1,1)
     Config.apply_transform()
     Queue.tick()
 end
