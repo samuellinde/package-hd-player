@@ -17,9 +17,10 @@ end
 
 function M.content_update(name)
     print("sub module content update", name)
-    if name == 'text.txt' then
-        text = resource.load_file(localized(name))
-    end
+    -- if name == 'text.txt' then
+    --     text = resource.load_file(localized(name))
+    -- end
+    text = sys.now()
 end
 
 function M.content_remove(name)
