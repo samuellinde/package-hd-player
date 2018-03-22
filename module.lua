@@ -137,7 +137,7 @@ local Config = (function()
     --     print "[WARNING]: will use static-config.json, so config.json is ignored"
     -- end
 
-    function update_config(config_file)
+    local function config(config_file)
         print("updated " .. config_file)
         raw = resource.load_file(localized(config_file))
         local config = json.decode(raw)
@@ -186,6 +186,7 @@ local Config = (function()
     end
 
     return {
+        update_config = function(config_file) return config(config_file) end;
         get_playlist = function() return playlist end;
         get_switch_time = function() return switch_time end;
         get_synced = function() return synced end;
