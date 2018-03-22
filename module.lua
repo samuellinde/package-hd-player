@@ -540,11 +540,11 @@ local Queue = (function()
         else
             for try = 1,3 do
                 if sys.now() + settings.PRELOAD_TIME < scheduled_until then
+                    text = 'not synced'
                     break
                 end
                 local item = Scheduler.get_next()
                 enqueue(scheduled_until, scheduled_until + item.duration, item)
-                text = 'not synced'
             end
         end
 
