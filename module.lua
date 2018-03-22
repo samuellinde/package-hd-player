@@ -71,7 +71,7 @@ local settings = {
 
 local white = resource.create_colored_texture(1,1,1,1)
 local black = resource.create_colored_texture(0,0,0,1)
-local font = resource.load_font "roboto.ttf"
+local font = resource.load_font(localized "roboto.ttf")
 
 function M.draw()
     font:write(100, 100, text, 30, 1,1,1,1)
