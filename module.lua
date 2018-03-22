@@ -157,9 +157,7 @@ local Config = (function()
             playlist = settings.FALLBACK_PLAYLIST
             switch_time = 0
             kenburns = false
-            text = 'playlist fallback'
         else
-            text = 'playlist items'
             playlist = {}
             local total_duration = 0
             for idx = 1, #config.playlist do
@@ -175,7 +173,7 @@ local Config = (function()
                         offset = offset,
                         total_duration = total_duration,
                         duration = item.duration,
-                        asset_name = item.file.asset_name,
+                        asset_name = localized(item.file.asset_name),
                         type = item.file.type,
                     }
                     offset = offset + item.duration
@@ -549,8 +547,8 @@ local Queue = (function()
         end
 
         if #jobs == 0 then
-            -- Loading.fade_in()
-            font:write(100, 100, text, 60, 1,1,1,1)
+            Loading.fade_in()
+            -- font:write(100, 100, text, 60, 1,1,1,1)
         else
             Loading.fade_out()
         end
