@@ -20,6 +20,14 @@ function M.content_remove(name)
     print("sub module content delete", name)
 end
 
+function M.draw()
+    -- print("--- frame", sys.now())
+    -- gl.clear(0, 0, 0, 1)
+    font:draw(100, 100, text, 60, 1, 1, 1, 1)
+    -- Config.apply_transform()
+    -- Queue.tick()
+end
+
 local shaders = {
     multisample = resource.create_shader[[
         uniform sampler2D Texture;
@@ -582,13 +590,5 @@ local Queue = (function()
 end)()
 
 util.set_interval(1, node.gc)
-
-function M.draw()
-    -- print("--- frame", sys.now())
-    -- gl.clear(0, 0, 0, 1)
-    font:draw(100, 100, text, 60, 1, 1, 1, 1)
-    Config.apply_transform()
-    Queue.tick()
-end
 
 return M
