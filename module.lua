@@ -547,8 +547,7 @@ local Queue = (function()
         end
 
         if #jobs == 0 then
-            -- Loading.fade_in()
-            font:write(100, 100, text, 60, 1,1,1,1)
+            Loading.fade_in()
         else
             Loading.fade_out()
         end
